@@ -3,6 +3,10 @@ const cors = require('cors');
 require('dotenv').config();
 const connectDB = require('./db');
 
+// Import Routes
+const resourcesRoutes = require('./routes/resources');
+const procurementRoutes = require('./routes/procurement');
+
 const app = express();
 const PORT = process.env.PORT || 3000;
 
@@ -19,35 +23,14 @@ app.get('/', (req, res) => {
   res.json({ message: 'Hospital Backend API is running!' });
 });
 
-// Sample API routes - Add your APIs here
+// Health check
 app.get('/api/health', (req, res) => {
   res.json({ status: 'OK', message: 'API is healthy' });
 });
 
-// Example: Get all patients
-app.get('/api/patients', (req, res) => {
-  res.json({ message: 'Get all patients' });
-});
-
-// Example: Create new patient
-app.post('/api/patients', (req, res) => {
-  res.json({ message: 'Create new patient', data: req.body });
-});
-
-// Example: Get patient by ID
-app.get('/api/patients/:id', (req, res) => {
-  res.json({ message: `Get patient with ID: ${req.params.id}` });
-});
-
-// Example: Update patient
-app.put('/api/patients/:id', (req, res) => {
-  res.json({ message: `Update patient with ID: ${req.params.id}`, data: req.body });
-});
-
-// Example: Delete patient
-app.delete('/api/patients/:id', (req, res) => {
-  res.json({ message: `Delete patient with ID: ${req.params.id}` });
-});
+// API Routes
+app.use('/api/resources', resourcesRoutes);
+app.use('/api/procurement', procurementRoutes);
 
 // Error handling middleware
 app.use((err, req, res, next) => {
