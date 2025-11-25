@@ -10,7 +10,7 @@
 
 .capacity-card {
   background: white;
-  border: 2px solid #E5E7EB;
+  border: 2px solid #e5e7eb;
   border-radius: 12px;
   padding: 20px;
   transition: all 0.2s;
@@ -21,18 +21,18 @@
 }
 
 .capacity-card.critical {
-  border-color: #FEE2E2;
-  background: #FEF2F2;
+  border-color: #fee2e2;
+  background: #fef2f2;
 }
 
 .capacity-card.warning {
-  border-color: #FEF3C7;
-  background: #FFFBEB;
+  border-color: #fef3c7;
+  background: #fffbeb;
 }
 
 .capacity-card.success {
-  border-color: #D1FAE5;
-  background: #F0FDF4;
+  border-color: #d1fae5;
+  background: #f0fdf4;
 }
 
 .capacity-header {
@@ -65,7 +65,7 @@
 
 .capacity-stat-label {
   font-size: 12px;
-  color: #6B7280;
+  color: #6b7280;
   font-weight: 500;
 }
 
@@ -76,19 +76,19 @@
 }
 
 .capacity-stat-value.available {
-  color: #10B981;
+  color: #10b981;
 }
 
 .capacity-bar {
   height: 8px;
-  background: #E5E7EB;
+  background: #e5e7eb;
   border-radius: 4px;
   overflow: hidden;
 }
 
 .capacity-bar-fill {
   height: 100%;
-  background: linear-gradient(90deg, #10B981 0%, #F59E0B 70%, #EF4444 85%);
+  background: linear-gradient(90deg, #10b981 0%, #f59e0b 70%, #ef4444 85%);
   transition: width 0.3s ease;
 }
 

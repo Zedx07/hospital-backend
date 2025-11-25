@@ -20,11 +20,11 @@
 }
 
 .stat-card.critical {
-  border-left: 4px solid #EF4444;
+  border-left: 4px solid #ef4444;
 }
 
 .stat-card.success {
-  border-left: 4px solid #10B981;
+  border-left: 4px solid #10b981;
 }
 
 .stat-icon {
@@ -43,7 +43,7 @@
 
 .stat-label {
   font-size: 14px;
-  color: #6B7280;
+  color: #6b7280;
 }
 
 .filters {
@@ -53,7 +53,7 @@
 
 .filter-btn {
   padding: 10px 20px;
-  border: 1px solid #E5E7EB;
+  border: 1px solid #e5e7eb;
   background: white;
   border-radius: 8px;
   font-size: 14px;
@@ -64,19 +64,19 @@
 }
 
 .filter-btn:hover {
-  background: #F3F4F6;
+  background: #f3f4f6;
 }
 
 .filter-btn.active {
-  background: #2563EB;
+  background: #2563eb;
   color: white;
-  border-color: #2563EB;
+  border-color: #2563eb;
 }
 
 .category-badge {
   display: inline-block;
   padding: 4px 12px;
-  background: #F3F4F6;
+  background: #f3f4f6;
   border-radius: 12px;
   font-size: 12px;
   font-weight: 500;

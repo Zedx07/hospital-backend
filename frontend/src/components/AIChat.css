@@ -10,7 +10,7 @@
 
 .chat-header {
   padding: 20px;
-  border-bottom: 1px solid #F3F4F6;
+  border-bottom: 1px solid #f3f4f6;
 }
 
 .chat-title {
@@ -22,7 +22,7 @@
 
 .chat-subtitle {
   font-size: 13px;
-  color: #6B7280;
+  color: #6b7280;
 }
 
 .chat-messages {
@@ -54,12 +54,12 @@
 }
 
 .message.agent .message-content {
-  background: #F3F4F6;
+  background: #f3f4f6;
   border-bottom-left-radius: 4px;
 }
 
 .message.user .message-content {
-  background: #2563EB;
+  background: #2563eb;
   color: white;
   border-bottom-right-radius: 4px;
 }
@@ -89,7 +89,7 @@
 .typing-indicator span {
   width: 8px;
   height: 8px;
-  background: #9CA3AF;
+  background: #9ca3af;
   border-radius: 50%;
   animation: typing 1.4s infinite;
 }
@@ -103,7 +103,9 @@
 }
 
 @keyframes typing {
-  0%, 60%, 100% {
+  0%,
+  60%,
+  100% {
     transform: translateY(0);
   }
   30% {
@@ -113,14 +115,14 @@
 
 .chat-quick-commands {
   padding: 16px 20px;
-  border-top: 1px solid #F3F4F6;
-  background: #F9FAFB;
+  border-top: 1px solid #f3f4f6;
+  background: #f9fafb;
 }
 
 .quick-commands-title {
   font-size: 13px;
   font-weight: 600;
-  color: #6B7280;
+  color: #6b7280;
   margin-bottom: 12px;
 }
 
@@ -133,7 +135,7 @@
 .quick-command-btn {
   padding: 8px 12px;
   background: white;
-  border: 1px solid #E5E7EB;
+  border: 1px solid #e5e7eb;
   border-radius: 8px;
   font-size: 13px;
   color: #374151;
@@ -142,14 +144,14 @@
 }
 
 .quick-command-btn:hover {
-  background: #2563EB;
+  background: #2563eb;
   color: white;
-  border-color: #2563EB;
+  border-color: #2563eb;
 }
 
 .chat-input-container {
   padding: 16px 20px;
-  border-top: 1px solid #F3F4F6;
+  border-top: 1px solid #f3f4f6;
   display: flex;
   gap: 12px;
 }
@@ -157,7 +159,7 @@
 .chat-input {
   flex: 1;
   padding: 12px 16px;
-  border: 1px solid #E5E7EB;
+  border: 1px solid #e5e7eb;
   border-radius: 8px;
   font-size: 14px;
   outline: none;
@@ -165,12 +167,12 @@
 }
 
 .chat-input:focus {
-  border-color: #2563EB;
+  border-color: #2563eb;
 }
 
 .chat-send-btn {
   padding: 12px 24px;
-  background: #2563EB;
+  background: #2563eb;
   color: white;
   border: none;
   border-radius: 8px;
@@ -181,7 +183,7 @@
 }
 
 .chat-send-btn:hover {
-  background: #1D4ED8;
+  background: #1d4ed8;
 }
 
 @media (max-width: 1024px) {

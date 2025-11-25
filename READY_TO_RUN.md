@@ -3,7 +3,9 @@
 ## ✅ What Has Been Created
 
 ### Backend (Node.js + Express + MongoDB)
+
 ✅ 5 MongoDB Schemas:
+
 - Staffing Management
 - Inventory Tracking
 - Bed Capacity Monitoring
@@ -11,29 +13,35 @@
 - Suppliers Database
 
 ✅ Complete REST API with 12+ endpoints:
+
 - Resource Management (Staffing, Inventory, Beds)
 - Procurement (Orders, Suppliers)
 - Query filtering & search
 - Update capabilities
 
 ### Frontend (React)
+
 ✅ Modern Split-Screen UI:
+
 - Left Panel (60%): Data Dashboard
 - Right Panel (40%): AI Chat Assistant
 
 ✅ 4 Main Feature Tabs:
+
 - 📦 **Inventory Management**: Stock tracking with low-stock alerts
 - 👥 **Staffing Management**: Department & shift allocation
 - 🛏️ **Bed Capacity**: Ward occupancy visualization
 - 📋 **Purchase Orders**: Approval workflow
 
 ✅ AI Chat Interface:
+
 - Conversational UI
 - Quick command buttons
 - Context-aware responses
 - Typing indicators
 
 ✅ Professional Design:
+
 - Clean, modern styling
 - Responsive (Desktop/Tablet/Mobile)
 - Smooth animations
@@ -44,17 +52,21 @@
 ## 🚀 How to Run
 
 ### Terminal 1 - Backend:
+
 ```bash
 cd c:\ShubhamWorkspace\Dev\Hackathon\hospital-backend
 npm start
 ```
+
 Runs on: `http://localhost:3000`
 
 ### Terminal 2 - Frontend:
+
 ```bash
 cd c:\ShubhamWorkspace\Dev\Hackathon\hospital-backend\frontend
 npm start
 ```
+
 Opens at: `http://localhost:3001` (auto-opens in browser)
 
 ---
@@ -87,6 +99,7 @@ Invoke-RestMethod -Method Post -Uri "http://localhost:3000/api/procurement/order
 ```
 
 ### Option 2: Use Postman or Thunder Client
+
 Import the endpoints from `API_TESTING.md` and run them manually.
 
 ---
@@ -94,27 +107,32 @@ Import the endpoints from `API_TESTING.md` and run them manually.
 ## 🎯 Demo Flow for Presentation
 
 1. **Start Both Servers**:
+
    - Backend on port 3000
    - Frontend on port 3001
 
 2. **Open Frontend** → Shows Dashboard
 
 3. **Inventory Tab**:
+
    - Point out low stock items (red badges)
    - Show total items count
    - Filter by "Low Stock Only"
 
 4. **AI Chat** (Right Panel):
+
    - Type: "Check inventory status"
    - Show AI response
    - Use quick command buttons
 
 5. **Orders Tab**:
+
    - Show pending orders
    - Click "✅ Approve" button
    - Watch status change in real-time
 
 6. **Staffing Tab**:
+
    - Show doctor/nurse counts
    - Highlight department breakdown
    - Show shift distribution
@@ -129,6 +147,7 @@ Import the endpoints from `API_TESTING.md` and run them manually.
 ## 📁 Complete File List
 
 ### Backend:
+
 ```
 hospital-backend/
 ├── models/
@@ -147,6 +166,7 @@ hospital-backend/
 ```
 
 ### Frontend:
+
 ```
 frontend/
 ├── src/
@@ -178,6 +198,7 @@ frontend/
 ## 🎨 UI Features
 
 ### Visual Elements:
+
 ✅ Status badges (🔴 Critical, 🟡 Warning, 🟢 Good)
 ✅ Color-coded cards
 ✅ Progress bars for occupancy
@@ -186,6 +207,7 @@ frontend/
 ✅ Modern card-based layout
 
 ### Interactions:
+
 ✅ Tab switching
 ✅ Filter buttons
 ✅ Approve/Reject orders
@@ -208,14 +230,14 @@ frontend/
 
 ## 🛠️ Tech Stack Summary
 
-| Layer | Technology |
-|-------|-----------|
-| Frontend | React 18, CSS3 |
-| Backend | Node.js, Express |
-| Database | MongoDB, Mongoose |
-| APIs | REST (JSON) |
-| Styling | Custom CSS (No frameworks) |
-| State | React Hooks (useState, useEffect) |
+| Layer    | Technology                        |
+| -------- | --------------------------------- |
+| Frontend | React 18, CSS3                    |
+| Backend  | Node.js, Express                  |
+| Database | MongoDB, Mongoose                 |
+| APIs     | REST (JSON)                       |
+| Styling  | Custom CSS (No frameworks)        |
+| State    | React Hooks (useState, useEffect) |
 
 ---
 
@@ -231,6 +253,7 @@ frontend/
 ## 🎓 Next Steps (Optional Enhancements)
 
 For future development:
+
 - [ ] Add user authentication
 - [ ] Real WebSocket for AI chat
 - [ ] Data visualization charts
@@ -245,16 +268,19 @@ For future development:
 ## 📞 Troubleshooting
 
 ### Frontend shows "Loading..." forever:
+
 - Check backend is running on port 3000
 - Open browser console for errors
 - Verify MongoDB connection
 
 ### Backend shows "MongoDB connection error":
+
 - Ensure MongoDB is running
 - Check .env file exists with MONGODB_URI
 - Try: `mongodb://localhost:27017/hospital_db`
 
 ### No data showing in UI:
+
 - Add sample data using PowerShell commands above
 - Check Network tab in browser DevTools
 - Verify hospital_id is "HOSP-001"
@@ -283,6 +309,7 @@ Open `http://localhost:3001` and showcase your Hospital Surge Management System!
 ---
 
 **Need Help?** Check:
+
 - `SETUP_GUIDE.md` - Detailed setup instructions
 - `API_TESTING.md` - Backend API documentation
 - Browser console - For frontend errors
