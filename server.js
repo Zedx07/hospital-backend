@@ -6,6 +6,7 @@ const connectDB = require('./db');
 // Import Routes
 const resourcesRoutes = require('./routes/resources');
 const procurementRoutes = require('./routes/procurement');
+const aiAgentRoutes = require('./routes/ai-agent');
 
 const app = express();
 const PORT = process.env.PORT || 3000;
@@ -31,6 +32,7 @@ app.get('/api/health', (req, res) => {
 // API Routes
 app.use('/api/resources', resourcesRoutes);
 app.use('/api/procurement', procurementRoutes);
+app.use('/api/ai-agent', aiAgentRoutes);
 
 // Error handling middleware
 app.use((err, req, res, next) => {

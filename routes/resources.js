@@ -9,13 +9,9 @@ const BedCapacity = require('../models/BedCapacity');
 // GET /api/resources/staffing
 router.get('/staffing', async (req, res) => {
     try {
-        const { hospital_id, department, shift } = req.query;
+        const { department, shift } = req.query;
 
-        if (!hospital_id) {
-            return res.status(400).json({ success: false, message: 'hospital_id is required' });
-        }
-
-        const filter = { hospital_id };
+        const filter = {};
         if (department) filter.department = department;
         if (shift) filter.shift = shift;
 
@@ -33,11 +29,10 @@ router.get('/staffing', async (req, res) => {
 // POST /api/resources/staffing
 router.post('/staffing', async (req, res) => {
     try {
-        const { hospital_id, staff_type, department, shift } = req.body;
+        const { staff_type, department, shift } = req.body;
 
         // Check if record exists
         const existing = await Staffing.findOne({
-            hospital_id,
             staff_type,
             department,
             shift
@@ -69,13 +64,9 @@ router.post('/staffing', async (req, res) => {
 // GET /api/resources/inventory
 router.get('/inventory', async (req, res) => {
     try {
-        const { hospital_id, category, low_stock } = req.query;
+        const { category, low_stock } = req.query;
 
-        if (!hospital_id) {
-            return res.status(400).json({ success: false, message: 'hospital_id is required' });
-        }
-
-        const filter = { hospital_id };
+        const filter = {};
         if (category) filter.category = category;
 
         let inventory = await Inventory.find(filter);
@@ -107,11 +98,10 @@ router.get('/inventory', async (req, res) => {
 // POST /api/resources/inventory
 router.post('/inventory', async (req, res) => {
     try {
-        const { hospital_id, item_name, location } = req.body;
+        const { item_name, location } = req.body;
 
         // Check if item exists
         const existing = await Inventory.findOne({
-            hospital_id,
             item_name,
             location
         });
@@ -142,13 +132,9 @@ router.post('/inventory', async (req, res) => {
 // GET /api/resources/capacity
 router.get('/capacity', async (req, res) => {
     try {
-        const { hospital_id, ward_type } = req.query;
+        const { ward_type } = req.query;
 
-        if (!hospital_id) {
-            return res.status(400).json({ success: false, message: 'hospital_id is required' });
-        }
-
-        const filter = { hospital_id };
+        const filter = {};
         if (ward_type) filter.ward_type = ward_type;
 
         let capacity = await BedCapacity.find(filter);
@@ -175,11 +161,10 @@ router.get('/capacity', async (req, res) => {
 // POST /api/resources/capacity
 router.post('/capacity', async (req, res) => {
     try {
-        const { hospital_id, ward_type } = req.body;
+        const { ward_type } = req.body;
 
         // Check if record exists
         const existing = await BedCapacity.findOne({
-            hospital_id,
             ward_type
         });
 

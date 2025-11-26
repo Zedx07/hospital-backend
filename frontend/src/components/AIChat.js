@@ -1,6 +1,9 @@
 import React, { useState, useRef, useEffect } from 'react';
 import './AIChat.css';
 
+// Backend API URL (proxy to ADK agent)
+const API_BASE_URL = 'http://localhost:3000/api';
+
 function AIChat({ hospitalId, activeTab }) {
     const [ messages, setMessages ] = useState([
         {
@@ -11,13 +14,60 @@ function AIChat({ hospitalId, activeTab }) {
     ]);
     const [ input, setInput ] = useState('');
     const [ isTyping, setIsTyping ] = useState(false);
+    const [ sessionInitialized, setSessionInitialized ] = useState(false);
+    const [ sessionId, setSessionId ] = useState(null);
     const messagesEndRef = useRef(null);
+
+    // Generate unique user ID based on hospitalId
+    const userId = `user_${hospitalId || 'default'}`;
 
     const scrollToBottom = () => {
         messagesEndRef.current?.scrollIntoView({ behavior: 'smooth' });
     };
 
     useEffect(scrollToBottom, [ messages ]);
+
+    // Initialize session with Google ADK Agent via backend proxy
+    useEffect(() => {
+        const initializeSession = async () => {
+            try {
+                // Generate unique session ID
+                const newSessionId = `session_${hospitalId || 'default'}_${Date.now()}`;
+
+                const response = await fetch(`${API_BASE_URL}/ai-agent/session`, {
+                    method: 'POST',
+                    headers: {
+                        'Content-Type': 'application/json',
+                    },
+                    body: JSON.stringify({
+                        userId: userId,
+                        sessionId: newSessionId,
+                        initialState: {
+                            hospitalId: hospitalId,
+                            activeTab: activeTab
+                        }
+                    }),
+                });
+
+                const data = await response.json();
+
+                if (response.ok || data.message?.includes('already exists')) {
+                    // Session created or already exists - store the session ID
+                    setSessionId(newSessionId);
+                    setSessionInitialized(true);
+                    console.log('ADK Agent session initialized:', newSessionId);
+                } else {
+                    console.error('Failed to initialize session');
+                }
+            } catch (error) {
+                console.error('Error initializing ADK session:', error);
+                // Continue with mock responses if ADK is unavailable
+                setSessionInitialized(false);
+            }
+        };
+
+        initializeSession();
+    }, []);
 
     const quickCommands = [
         { label: '📊 Check Status', command: 'Check inventory status' },
@@ -28,6 +78,12 @@ function AIChat({ hospitalId, activeTab }) {
     const handleSend = async () => {
         if (!input.trim()) return;
 
+        // Check if session is initialized
+        if (!sessionId) {
+            console.error('Session not initialized yet');
+            return;
+        }
+
         const userMessage = {
             type: 'user',
             text: input,
@@ -35,21 +91,51 @@ function AIChat({ hospitalId, activeTab }) {
         };
 
         setMessages(prev => [ ...prev, userMessage ]);
+        const currentInput = input;
         setInput('');
         setIsTyping(true);
 
-        // Simulate AI response
-        setTimeout(() => {
-            const response = generateAIResponse(input, activeTab);
+        try {
+            // Call Google ADK Agent API via backend proxy using the stored session ID
+            const response = await fetch(`${API_BASE_URL}/ai-agent/query`, {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json',
+                },
+                body: JSON.stringify({
+                    userId: userId,
+                    sessionId: sessionId,
+                    message: currentInput
+                }),
+            });
+
+            if (!response.ok) {
+                throw new Error('Failed to get response from ADK agent');
+            }
+
+            const data = await response.json();
+            const aiResponse = data.response || 'No response from agent';
+
             setMessages(prev => [ ...prev, {
                 type: 'agent',
-                text: response,
+                text: aiResponse,
                 timestamp: new Date()
             } ]);
+        } catch (error) {
+            console.error('Error calling ADK agent:', error);
+            // Fallback to mock response if ADK is unavailable
+            const fallbackResponse = generateAIResponse(currentInput, activeTab);
+            setMessages(prev => [ ...prev, {
+                type: 'agent',
+                text: fallbackResponse + '\n\n⚠️ (Using fallback - ADK agent unavailable)',
+                timestamp: new Date()
+            } ]);
+        } finally {
             setIsTyping(false);
-        }, 1500);
+        }
     };
 
+    // Fallback response generator (used when ADK agent is unavailable)
     const generateAIResponse = (query, tab) => {
         const lowerQuery = query.toLowerCase();
 

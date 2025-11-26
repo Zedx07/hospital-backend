@@ -1,10 +1,6 @@
 const mongoose = require('mongoose');
 
 const staffingSchema = new mongoose.Schema({
-    hospital_id: {
-        type: String,
-        required: true
-    },
     staff_type: {
         type: String,
         required: true,

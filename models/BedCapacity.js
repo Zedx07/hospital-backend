@@ -1,10 +1,6 @@
 const mongoose = require('mongoose');
 
 const bedCapacitySchema = new mongoose.Schema({
-    hospital_id: {
-        type: String,
-        required: true
-    },
     ward_type: {
         type: String,
         required: true,

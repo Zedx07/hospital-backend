@@ -1,10 +1,6 @@
 const mongoose = require('mongoose');
 
 const inventorySchema = new mongoose.Schema({
-    hospital_id: {
-        type: String,
-        required: true
-    },
     item_name: {
         type: String,
         required: true

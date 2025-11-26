@@ -8,13 +8,9 @@ const Supplier = require('../models/Supplier');
 // GET /api/procurement/orders
 router.get('/orders', async (req, res) => {
     try {
-        const { hospital_id, status, priority } = req.query;
+        const { status, priority } = req.query;
 
-        if (!hospital_id) {
-            return res.status(400).json({ success: false, message: 'hospital_id is required' });
-        }
-
-        const filter = { hospital_id };
+        const filter = {};
         if (status) filter.status = status;
         if (priority) filter.priority = priority;
 
@@ -58,7 +54,6 @@ router.get('/orders/:order_id', async (req, res) => {
             success: true,
             data: {
                 order_id: order.order_id,
-                hospital_id: order.hospital_id,
                 items: order.items,
                 total_amount: order.total_amount,
                 status: order.status,
@@ -77,13 +72,13 @@ router.get('/orders/:order_id', async (req, res) => {
 // POST /api/procurement/orders
 router.post('/orders', async (req, res) => {
     try {
-        const { hospital_id, supplier_id, items, priority, requested_by } = req.body;
+        const { supplier_id, items, priority, requested_by } = req.body;
 
         // Validate required fields
-        if (!hospital_id || !supplier_id || !items || items.length === 0) {
+        if (!supplier_id || !items || items.length === 0) {
             return res.status(400).json({
                 success: false,
-                message: 'hospital_id, supplier_id, and items are required'
+                message: 'supplier_id and items are required'
             });
         }
 
@@ -102,7 +97,6 @@ router.post('/orders', async (req, res) => {
         // Create purchase order
         const order = new PurchaseOrder({
             order_id,
-            hospital_id,
             supplier_id,
             items: itemsWithTotal,
             total_amount,
@@ -158,14 +152,18 @@ router.patch('/orders/:order_id', async (req, res) => {
 // GET /api/procurement/suppliers
 router.get('/suppliers', async (req, res) => {
     try {
-        const { item_type } = req.query;
 
-        const filter = { is_active: true };
-        if (item_type) {
-            filter.items_supplied = item_type;
-        }
+        // const { item_type } = req.query;
 
-        const suppliers = await Supplier.find(filter);
+        // console.log('Supplier: item type', item_type);
+        // console.log({ item_type });
+
+        // const filter = { is_active: true };
+        // if (item_type) {
+        //     filter.items_supplied = item_type;
+        // }
+
+        const suppliers = await Supplier.find();
 
         const formattedSuppliers = suppliers.map(supplier => ({
             supplier_id: supplier.supplier_id,
@@ -183,6 +181,8 @@ router.get('/suppliers', async (req, res) => {
             data: formattedSuppliers
         });
     } catch (error) {
+        console.log('Error in Supplier', error);
+
         res.status(500).json({ success: false, error: error.message });
     }
 });

@@ -6,10 +6,6 @@ const purchaseOrderSchema = new mongoose.Schema({
         required: true,
         unique: true
     },
-    hospital_id: {
-        type: String,
-        required: true
-    },
     supplier_id: {
         type: String,
         required: true
