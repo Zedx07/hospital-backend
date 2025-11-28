@@ -1,6 +1,7 @@
 import React, { useState } from 'react';
 import './App.css';
 import Header from './components/Header';
+import SurgePredictionDashboard from './pages/SurgePredictionDashboard';
 import InventoryTab from './pages/InventoryTab';
 import StaffingTab from './pages/StaffingTab';
 import BedCapacityTab from './pages/BedCapacityTab';
@@ -8,10 +9,11 @@ import OrdersTab from './pages/OrdersTab';
 import AIChat from './components/AIChat';
 
 function App() {
-    const [ activeTab, setActiveTab ] = useState('inventory');
+    const [ activeTab, setActiveTab ] = useState('surge');
     const [ hospitalId ] = useState('HOSP-001');
 
     const tabs = [
+        { id: 'surge', label: '🚨 Surge Alert', icon: '🚨' },
         { id: 'inventory', label: '📦 Inventory', icon: '📦' },
         { id: 'staffing', label: '👥 Staffing', icon: '👥' },
         { id: 'beds', label: '🛏️ Beds', icon: '🛏️' },
@@ -41,6 +43,7 @@ function App() {
                 <div className="split-layout">
                     {/* Left Panel - Data Dashboard */}
                     <div className="left-panel">
+                        {activeTab === 'surge' && <SurgePredictionDashboard hospitalId={hospitalId} />}
                         {activeTab === 'inventory' && <InventoryTab hospitalId={hospitalId} />}
                         {activeTab === 'staffing' && <StaffingTab hospitalId={hospitalId} />}
                         {activeTab === 'beds' && <BedCapacityTab hospitalId={hospitalId} />}
