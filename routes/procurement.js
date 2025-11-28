@@ -2,6 +2,7 @@ const express = require('express');
 const router = express.Router();
 const PurchaseOrder = require('../models/PurchaseOrder');
 const Supplier = require('../models/Supplier');
+const Inventory = require('../models/Inventory');
 
 // ========== PURCHASE ORDER ROUTES ==========
 
@@ -135,6 +136,19 @@ router.patch('/orders/:order_id', async (req, res) => {
 
         if (!order) {
             return res.status(404).json({ success: false, message: 'Order not found' });
+        }
+
+        // If status is 'approved', update inventory for each item in the order
+        if (status === 'approved') {
+            for (const item of order.items) {
+                await Inventory.findOneAndUpdate(
+                    { item_name: item.item_name },
+                    {
+                        $inc: { current_stock: item.quantity },
+                        $set: { last_updated: new Date() }
+                    }
+                );
+            }
         }
 
         res.json({
